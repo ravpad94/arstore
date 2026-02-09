@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARSTORE - Apa Aja Dijual! | Pricelist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 50%, #0d47a1 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            top: -50%;
+            left: -50%;
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: transparent;
+            animation: float 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .store-title {
+            font-size: 2.5em;
+            font-weight: 900;
+            margin: 15px 0 10px;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 4px;
+            background: linear-gradient(45deg, #ffffff 0%, #ffffff 50%, #FFEB3B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))
+                    drop-shadow(0 0 20px rgba(255, 167, 38, 0.6));
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { 
+                filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))
+                        drop-shadow(0 0 15px rgba(255, 167, 38, 0.5));
+            }
+            to { 
+                filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.4))
+                        drop-shadow(0 0 30px rgba(255, 235, 59, 0.8));
+            }
+        }
+
+        .store-tagline {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffeb3b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
+        }
+
+        .header-divider {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffeb3b, transparent);
+            margin: 20px auto;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 15px rgba(255, 235, 59, 0.5);
+        }
+
+        .header-subtitle {
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-top: 10px;
+        }
+
+        .wa-notice {
+            background: rgba(76, 175, 80, 0.3);
+            border: 2px solid rgba(76, 175, 80, 0.6);
+            padding: 12px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.95em;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        /* ========== SEARCH BAR ========== */
+        .search-container {
+            padding: 25px 20px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-bottom: 3px solid #1976d2;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 3px solid #1976d2;
+            border-radius: 50px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.2);
+        }
+
+        .search-box input:focus {
+            border-color: #0d47a1;
+            box-shadow: 0 6px 20px rgba(13, 71, 161, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3em;
+            color: #1976d2;
+        }
+
+        /* ========== CONTENT ========== */
+        .content {
+            padding: 30px 20px;
+        }
+
+        /* ========== ACCORDION ========== */
+        .category-accordion {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .category-accordion:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
+            color: white;
+            padding: 18px 25px;
+            font-size: 1.3em;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .category-header:hover {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+        }
+
+        .category-header.active {
+            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .category-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #f8f9fa;
+        }
+
+        .category-content.active {
+            max-height: 3000px;
+            transition: max-height 0.6s ease-in;
+        }
+
+        .product-list {
+            padding: 20px;
+        }
+
+        .product-item {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid #1976d2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.2);
+        }
+
+        .product-name {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #f44336;
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        /* ========== NOTE BOX ========== */
+        .note-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-left: 6px solid #fbc02d;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.2);
+        }
+
+        .note-box h3 {
+            color: #f57f17;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .note-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .note-box li {
+            color: #795548;
+            font-size: 1em;
+            line-height: 1.8;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .note-box li::before {
+            content: "▸";
+            position: absolute;
+            left: 5px;
+            color: #f57f17;
+            font-weight: bold;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+        }
+
+        .footer-info {
+            margin-top: 25px;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        .footer-info strong {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .store-title {
+                font-size: 1.8em;
+            }
+
+            .store-tagline {
+                font-size: 0.9em;
+                letter-spacing: 2px;
+            }
+
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .category-header {
+                font-size: 1.1em;
+                padding: 15px 20px;
+            }
+
+            .product-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .product-price {
+                margin-left: 0;
+            }
+
+            .header-subtitle, .wa-notice {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .store-title {
+                font-size: 1.5em;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-item {
+            animation: slideDown 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="arstore.png" alt="ARSTORE Logo" onerror="this.parentElement.innerHTML='<div style=\'font-size:3em;color:#1976d2\'>🛒</div>'">
+                </div>
+            </div>
+            <h1 class="store-title">ARSTORE</h1>
+            <div class="store-tagline">Apa Aja Dijual!</div>
+            <div class="header-divider"></div>
+            <div class="header-subtitle">📋 Daftar Harga</div>
+            <div class="wa-notice">💬 Selain harga di bawah, tanyakan langsung via WhatsApp</div>
+        </header>
+
+        <!-- SEARCH BAR -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Cari produk atau kategori..." onkeyup="searchProducts()">
+                <span class="search-icon">🔎</span>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content" id="pricelistContent">
+            <!-- Minuman -->
+            <div class="category-accordion" data-category="minuman">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-title">
+                        <span>💧</span>
+                        <span>Minuman</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="product-list">
+                        <div class="product-item" data-name="aqua gemoy">
+                            <div class="product-name">Aqua Gemoy</div>
+                            <div class="product-price">Rp 29.000</div>
+                        </div>
+                        <div class="product-item" data-name="neo axy">
+                            <div class="product-name">Neo Axy</div>
+                            <div class="product-price">Rp 24.000</div>
+                        </div>
+                        <div class="product-item" data-name="teh gelas">
+                            <div class="product-name">Teh Gelas</div>
+                            <div class="product-price">Rp 24.000</div>
+                        </div>
+                        <div class="product-item" data-name="teh otee">
+                            <div class="product-name">Teh Otee</div>
+                            <div class="product-price">Rp 24.000</div>
+                        </div>
+                        <div class="product-item" data-name="glitz rasa">
+                            <div class="product-name">Glitz Rasa</div>
+                            <div class="product-price">Rp 22.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kue Kemasan Toples 250 gram -->
+            <div class="category-accordion" data-category="kue kemasan toples">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-title">
+                        <span>🍰</span>
+                        <span>Kue Kemasan Toples 250 gram</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="product-list">
+                        <div class="product-item" data-name="janit">
+                            <div class="product-name">Janit</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="nastar">
+                            <div class="product-name">Nastar</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="matcha">
+                            <div class="product-name">Matcha</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="chococips">
+                            <div class="product-name">Chococips</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="garut">
+                            <div class="product-name">Garut</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="tumbrit">
+                            <div class="product-name">Tumbrit</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="kue kacang">
+                            <div class="product-name">Kue Kacang</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="kastengel">
+                            <div class="product-name">Kastengel</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="putri salju">
+                            <div class="product-name">Putri Salju</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kue Kering Per Kilo -->
+            <div class="category-accordion" data-category="kue kering">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-title">
+                        <span>🍰</span>
+                        <span>Kue Kering (Per Kilo)</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="product-list">
+                        <div class="product-item" data-name="nastar">
+                            <div class="product-name">Nastar</div>
+                            <div class="product-price">Rp 80.000</div>
+                        </div>
+                        <div class="product-item" data-name="nastar keju">
+                            <div class="product-name">Nastar Keju</div>
+                            <div class="product-price">Rp 85.000</div>
+                        </div>
+                        <div class="product-item" data-name="tumbrit strow">
+                            <div class="product-name">Tumbrit Strow</div>
+                            <div class="product-price">Rp 75.000</div>
+                        </div>
+                        <div class="product-item" data-name="chococips">
+                            <div class="product-name">Chococips</div>
+                            <div class="product-price">Rp 75.000</div>
+                        </div>
+                        <div class="product-item" data-name="putri salju">
+                            <div class="product-name">Putri Salju</div>
+                            <div class="product-price">Rp 75.000</div>
+                        </div>
+                        <div class="product-item" data-name="garut keju">
+                            <div class="product-name">Garut Keju</div>
+                            <div class="product-price">Rp 75.000</div>
+                        </div>
+                        <div class="product-item" data-name="kastengel">
+                            <div class="product-name">Kastengel</div>
+                            <div class="product-price">Rp 75.000</div>
+                        </div>
+                        <div class="product-item" data-name="roti kacang">
+                            <div class="product-name">Roti Kacang</div>
+                            <div class="product-price">Rp 65.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cemilan -->
+            <div class="category-accordion" data-category="cemilan">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-title">
+                        <span>🍪</span>
+                        <span>Cemilan (Harga Mulai)</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="product-list">
+                        <div class="product-item" data-name="baricho">
+                            <div class="product-name">Baricho</div>
+                            <div class="product-price">Rp 12.000</div>
+                        </div>
+                        <div class="product-item" data-name="krupuk tongkol">
+                            <div class="product-name">Krupuk Tongkol</div>
+                            <div class="product-price">Rp 12.000</div>
+                        </div>
+                        <div class="product-item" data-name="kripik ubi ungu">
+                            <div class="product-name">Kripik Ubi Ungu</div>
+                            <div class="product-price">Rp 12.000</div>
+                        </div>
+                        <div class="product-item" data-name="kripik bothe">
+                            <div class="product-name">Kripik Bothe</div>
+                            <div class="product-price">Rp 12.000</div>
+                        </div>
+                        <div class="product-item" data-name="yola terompet">
+                            <div class="product-name">Yola Terompet</div>
+                            <div class="product-price">Rp 13.000</div>
+                        </div>
+                        <div class="product-item" data-name="krupuk sotong">
+                            <div class="product-name">Krupuk Sotong</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="permen yupi">
+                            <div class="product-name">Permen Yupi</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="tahu walik">
+                            <div class="product-name">Tahu Walik</div>
+                            <div class="product-price">Rp 18.000</div>
+                        </div>
+                        <div class="product-item" data-name="sus coklat">
+                            <div class="product-name">Sus Coklat</div>
+                            <div class="product-price">Rp 18.000</div>
+                        </div>
+                        <div class="product-item" data-name="kripik tempe 500g">
+                            <div class="product-name">Kripik Tempe (500g)</div>
+                            <div class="product-price">Rp 24.000</div>
+                        </div>
+                        <div class="product-item" data-name="kripik tempe 250g">
+                            <div class="product-name">Kripik Tempe (250g)</div>
+                            <div class="product-price">Rp 13.000</div>
+                        </div>
+                        <div class="product-item" data-name="krupik tenggiri">
+                            <div class="product-name">Krupik Tenggiri</div>
+                            <div class="product-price">Rp 15.000</div>
+                        </div>
+                        <div class="product-item" data-name="kripik sukun">
+                            <div class="product-name">Kripik Sukun</div>
+                            <div class="product-price">Rp 15.000</div>
+                        </div>
+                        <div class="product-item" data-name="cipiran">
+                            <div class="product-name">Cipiran</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="undruk yuyu">
+                            <div class="product-name">Undruk Yuyu</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="pisang oven 250g">
+                            <div class="product-name">Pisang Oven (250g)</div>
+                            <div class="product-price">Rp 22.000</div>
+                        </div>
+                        <div class="product-item" data-name="pisang oven 500g">
+                            <div class="product-name">Pisang Oven (500g)</div>
+                            <div class="product-price">Rp 45.000</div>
+                        </div>
+                        <div class="product-item" data-name="inaco">
+                            <div class="product-name">Inaco</div>
+                            <div class="product-price">Rp 26.000</div>
+                        </div>
+                        <div class="product-item" data-name="peyek full dele">
+                            <div class="product-name">Peyek Full Dele/kg</div>
+                            <div class="product-price">Rp 70.000</div>
+                        </div>
+                        <div class="product-item" data-name="peyek dele full kacang">
+                            <div class="product-name">Peyek Dele Full Kacang/kg</div>
+                            <div class="product-price">Rp 75.000</div>
+                        </div>
+                        <div class="product-item" data-name="onde ketawa">
+                            <div class="product-name">Onde Ketawa (500g)</div>
+                            <div class="product-price">Rp 29.000</div>
+                        </div>
+                        <div class="product-item" data-name="bolu jadul">
+                            <div class="product-name">Bolu Jadul</div>
+                            <div class="product-price">Rp 16.000</div>
+                        </div>
+                        <div class="product-item" data-name="dolan oat toples">
+                            <div class="product-name">Dolan Oat Toples</div>
+                            <div class="product-price">Rp 26.000</div>
+                        </div>
+                        <div class="product-item" data-name="yupi crunchy toples">
+                            <div class="product-name">Yupi Crunchy Toples</div>
+                            <div class="product-price">Rp 26.000</div>
+                        </div>
+                        <div class="product-item" data-name="mochi isi 30">
+                            <div class="product-name">Mochi Isi 30</div>
+                            <div class="product-price">Rp 65.000</div>
+                        </div>
+                        <div class="product-item" data-name="good time toples">
+                            <div class="product-name">Good Time Toples</div>
+                            <div class="product-price">Rp 26.000</div>
+                        </div>
+                        <div class="product-item" data-name="kurma golden">
+                            <div class="product-name">Kurma Golden</div>
+                            <div class="product-price">Rp 30.000/kg</div>
+                        </div>
+                        <div class="product-item" data-name="golden ball toples">
+                            <div class="product-name">Golden Ball Toples</div>
+                            <div class="product-price">Rp 23.000</div>
+                        </div>
+                        <div class="product-item" data-name="chococips">
+                            <div class="product-name">Chococips</div>
+                            <div class="product-price">Rp 15.000</div>
+                        </div>
+                        <div class="product-item" data-name="bella rosa toples">
+                            <div class="product-name">Bella Rosa Toples</div>
+                            <div class="product-price">Rp 23.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTE BOX -->
+            <div class="note-box">
+                <h3>📌 Catatan Penting</h3>
+                <ul>
+                    <li>Harga dapat berubah sewaktu-waktu tanpa pemberitahuan!</li>
+                    <li>Stok terbatas, pesan sekarang juga!</li>
+                    <li>Untuk pemesanan dalam jumlah besar, hubungi kami untuk harga spesial/reseller</li>
+                    <li>Pengiriman tersedia untuk area Blitar dan sekitarnya, sesuai kesepakatan</li>
+                    <li>Pembayaran via Cash on Delivery (COD) atau Transfer, sesuai kesepakatan</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <h3>🎊 ARSTORE - apa aja dijual! 🎊</h3>
+            <p style="margin-top: 10px; font-size: 1.1em;">Pesan sekarang dan dapatkan produk sesuai dengan kebutuhan kamu!</p>
+            
+            <a href="https://wa.me/6281559986777" class="contact-btn">
+                💬 Pesan via WhatsApp sekarang!
+            </a>
+            
+            <div class="footer-info">
+                <strong>ARSTORE by ARFISH</strong>
+                📍 Kademangan, Blitar, Jawa Timur<br>
+                📞 0815-5998-6777<br>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Toggle Category Accordion
+        function toggleCategory(header) {
+            const content = header.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.category-header');
+            const allContents = document.querySelectorAll('.category-content');
+            
+            // Close all other accordions
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                }
+            });
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                }
+            });
+            
+            // Toggle current accordion
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Search Products
+        function searchProducts() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const categories = document.querySelectorAll('.category-accordion');
+            let hasResults = false;
+
+            categories.forEach(category => {
+                const categoryName = category.getAttribute('data-category').toLowerCase();
+                const products = category.querySelectorAll('.product-item');
+                let categoryHasMatch = false;
+
+                // Check if category name matches
+                if (categoryName.includes(searchInput)) {
+                    categoryHasMatch = true;
+                }
+
+                // Check products
+                products.forEach(product => {
+                    const productName = product.getAttribute('data-name').toLowerCase();
+                    
+                    if (searchInput === '' || productName.includes(searchInput) || categoryHasMatch) {
+                        product.style.display = 'flex';
+                        hasResults = true;
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+
+                // Show/hide category
+                const visibleProducts = Array.from(products).filter(p => p.style.display !== 'none');
+                if (visibleProducts.length > 0 || categoryHasMatch) {
+                    category.style.display = 'block';
+                    // Auto-expand if searching
+                    if (searchInput !== '') {
+                        category.querySelector('.category-header').classList.add('active');
+                        category.querySelector('.category-content').classList.add('active');
+                    }
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+
+            // Show no results message
+            const noResultsMsg = document.querySelector('.no-results');
+            if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+
+            if (!hasResults && searchInput !== '') {
+                const content = document.getElementById('pricelistContent');
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.innerHTML = '😔 Produk tidak ditemukan<br><small>Coba kata kunci lain</small>';
+                content.appendChild(noResults);
+            }
+        }
+
+        // Reset search when cleared
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            if (e.target.value === '') {
+                searchProducts();
+            }
+        });
+    </script>
+</body>
+</html>
