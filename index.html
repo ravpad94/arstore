@@ -388,6 +388,127 @@
             font-weight: bold;
         }
 
+        /* ========== TESTIMONIAL ========== */
+        .testimonial-section {
+            margin: 40px 0;
+        }
+
+        .testimonial-title {
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .testimonial-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #42a5f5;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-size: 5em;
+            color: rgba(66, 165, 245, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(66, 165, 245, 0.25);
+            border-left-color: #1976d2;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #42a5f5 0%, #1976d2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(66, 165, 245, 0.3);
+            animation: avatarPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes avatarPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(66, 165, 245, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 16px rgba(66, 165, 245, 0.4);
+            }
+        }
+
+        .testimonial-name {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+
+        .testimonial-rating {
+            color: #FFA726;
+            font-size: 1em;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-text {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.7;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animasi untuk testimonial cards */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .testimonial-card:nth-child(1) {
+            animation: slideInUp 0.6s ease-out 0.2s both;
+        }
+
+        .testimonial-card:nth-child(2) {
+            animation: slideInUp 0.6s ease-out 0.4s both;
+        }
+
         /* ========== FOOTER ========== */
         footer {
             background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
@@ -482,6 +603,14 @@
 
             .header-subtitle, .wa-notice {
                 font-size: 0.9em;
+            }
+
+            .testimonial-container {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-title {
+                font-size: 1.5em;
             }
         }
 
@@ -820,6 +949,35 @@
                     <li>Pengiriman tersedia untuk area Blitar dan sekitarnya, sesuai kesepakatan</li>
                     <li>Pembayaran via Cash on Delivery (COD) atau Transfer, sesuai kesepakatan</li>
                 </ul>
+            </div>
+
+            <!-- TESTIMONIAL SECTION -->
+            <div class="testimonial-section">
+                <h2 class="testimonial-title">
+                    💬 Apa Kata Mereka?
+                </h2>
+                
+                <div class="testimonial-container">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">AS</div>
+                        <div class="testimonial-name">Apris Susilo</div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <div class="testimonial-text">
+                            "Stok jajanan banyak dan harga terjangkau. Cocok banget buat lebaran atau buat cemilan sehari-hari!"
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">AY</div>
+                        <div class="testimonial-name">Arsel Yorfano</div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <div class="testimonial-text">
+                            "Saya suka makan, jadi saya sering makan cemilan yang dijual di ARSTORE!"
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
